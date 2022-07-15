@@ -13,7 +13,7 @@
 
 
 UENUM()
-enum modes { Game, Pause, Lose, Clear };
+enum modes { Game, Pause, Lose, Clear, Settings };
 UCLASS()
 class SHITTINGONPUTIN_API AMainLevelHud : public AHUD
 {
@@ -28,6 +28,8 @@ public:
 		TSubclassOf<UUserWidget> OnLose;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Defaults")
 		TSubclassOf<UUserWidget> InMenu;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Defaults")
+		TSubclassOf<UUserWidget> InSettings;
 	AMainLevelHud();
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Runtime")
 	UUserWidget *IngameGenerated;

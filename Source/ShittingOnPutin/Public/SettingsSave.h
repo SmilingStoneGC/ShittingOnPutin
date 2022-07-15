@@ -20,6 +20,8 @@ class SHITTINGONPUTIN_API USettingsSave : public USaveGame
 			float MusicVolume = 1.0f;
 		UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Volume")
 			float EffectVolume = 1.0f;
+		UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "GraphicsSettings")
+			int32 AAmethod = 1;
 
 		
 };

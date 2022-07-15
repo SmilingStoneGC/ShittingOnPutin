@@ -37,6 +37,8 @@ void AMainLevelHud::ChangeMode(modes mode)
 			Current_widget = CreateWidget<UUserWidget>(GetWorld(), InMenu);
 						
 			break;
+		case Settings:
+			Current_widget = CreateWidget<UUserWidget>(GetWorld(), InSettings);
 	}
 	Current_widget->AddToViewport();
 }
