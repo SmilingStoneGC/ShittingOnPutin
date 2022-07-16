@@ -58,6 +58,10 @@ void AMainPlayer::SpawnPoop()
 			//PoopAudioComponent->Play();
 		//}
 		//UGameplayStatics::PlaySound2D(this, PoopSoundCue);
+		
+	}
+	else {
+		Cast<UInGameUI>(Cast<AMainLevelHud>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD())->IngameGenerated)->SetPoopAvilable(false);
 	}
 
 }

@@ -61,7 +61,10 @@ public:
 		float Score = 0;
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
+	UFUNCTION(BlueprintCallable)
+		bool is_poop_empty() {
+		return poop_count > 0;
+	}
 	UFUNCTION(BlueprintCallable)
 	
 	void addScore(float power) {
@@ -81,6 +84,7 @@ public:
 	}
 	UFUNCTION(BlueprintCallable)
 		void renew_poop() {
+		Cast<UInGameUI>(Cast<AMainLevelHud>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD())->IngameGenerated)->SetPoopAvilable(true);
 			poop_count = poop_max;
 		}
 	UFUNCTION(BlueprintCallable)

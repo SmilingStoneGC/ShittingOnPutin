@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/Button.h"
+#include "Components/Image.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/TextBlock.h"
 #include "Kismet/GameplayStatics.h"
@@ -22,8 +23,14 @@ class SHITTINGONPUTIN_API UInGameUI : public UUserWidget
 	public:
 	UFUNCTION(BlueprintCallable, Category = "My_UI_Funct")
 		void SetScoreText(float score);
-	UPROPERTY(BlueprintReadWrite ,Category = "Settings")
+	UFUNCTION(BlueprintCallable, Category = "My_UI_Funct")
+		void SetPoopAvilable(bool Aviable);
+	UPROPERTY(BlueprintReadWrite,Category = "Settings")
 		UButton *PoopButton;
+	UPROPERTY(BlueprintReadWrite, Category = "Settings")
+		UImage* PoopAviableImage;
+	UPROPERTY(BlueprintReadWrite, Category = "Settings")
+		UImage* PoopUnaviableImage;
 	UPROPERTY(EditDefaultsOnly, Category = "Settings")
 		FString DefaultScoreText;
 	UPROPERTY(BlueprintReadWrite, Category = "Settings")
