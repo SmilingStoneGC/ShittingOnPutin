@@ -8,7 +8,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/TextBlock.h"
 #include "Kismet/GameplayStatics.h"
-
+#include "Components/ProgressBar.h"
 #include "InGameUI.generated.h"
 
 /**
@@ -25,10 +25,14 @@ class SHITTINGONPUTIN_API UInGameUI : public UUserWidget
 		void SetScoreText(float score);
 	UFUNCTION(BlueprintCallable, Category = "My_UI_Funct")
 		void SetPoopAvilable(bool Aviable);
+	UFUNCTION(BlueprintCallable, Category = "My_UI_Funct")
+		void UpdatePercent(float Percent);
 	UPROPERTY(BlueprintReadWrite,Category = "Settings")
 		UButton *PoopButton;
 	UPROPERTY(BlueprintReadWrite, Category = "Settings")
 		UImage* PoopAviableImage;
+	UPROPERTY(BlueprintReadWrite, Category = "Settings")
+		UProgressBar* PoopCountBar;
 	UPROPERTY(BlueprintReadWrite, Category = "Settings")
 		UImage* PoopUnaviableImage;
 	UPROPERTY(EditDefaultsOnly, Category = "Settings")

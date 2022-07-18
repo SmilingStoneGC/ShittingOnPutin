@@ -54,15 +54,15 @@ void AMainPlayer::SpawnPoop()
 		spawnedpoop->set_power(1);
 		UGameplayStatics::FinishSpawningActor(spawnedpoop, trans);
 		poop_count--;
+		if(!poop_count)Cast<UInGameUI>(Cast<AMainLevelHud>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD())->IngameGenerated)->SetPoopAvilable(false);
 		//if (PoopSoundCue) {
 			//PoopAudioComponent->Play();
 		//}
 		//UGameplayStatics::PlaySound2D(this, PoopSoundCue);
 		
 	}
-	else {
-		Cast<UInGameUI>(Cast<AMainLevelHud>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD())->IngameGenerated)->SetPoopAvilable(false);
-	}
+	
+	Cast<UInGameUI>(Cast<AMainLevelHud>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD())->IngameGenerated)->UpdatePercent((float)poop_count / (float)poop_max);
 
 }
 

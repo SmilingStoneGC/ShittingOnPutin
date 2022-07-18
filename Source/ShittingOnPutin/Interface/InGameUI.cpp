@@ -9,6 +9,7 @@ void UInGameUI::NativeConstruct()
 	if (Cast<AMainPlayer>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn())) {
 		SetScoreText(Cast<AMainPlayer>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn())->getScore());
 		SetPoopAvilable(Cast<AMainPlayer>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn())->is_poop_empty());
+		UpdatePercent(Cast<AMainPlayer>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn())->get_poop_count_percent());
 	}
 	else SetScoreText(0);
 }
@@ -34,4 +35,10 @@ void UInGameUI::SetPoopAvilable(bool Aviable)
 		PoopAviableImage->SetVisibility(ESlateVisibility::Hidden);
 		PoopUnaviableImage->SetVisibility(ESlateVisibility::Visible);
 	}
+}
+
+void UInGameUI::UpdatePercent(float Percent)
+{
+	UE_LOG(LogTemp, Display, TEXT("UpdatePercent %f"), Percent);
+	PoopCountBar->SetPercent(Percent);
 }

@@ -54,6 +54,9 @@ public:
 		FVector direction = FVector::ZeroVector;
 	int times = 0;
 	// Called when the game starts or when spawned
+	float get_poop_count_percent() {
+		return (float) poop_count/ (float)poop_max;
+	}
 	virtual void BeginPlay() override;
 
 public:
@@ -84,8 +87,10 @@ public:
 	}
 	UFUNCTION(BlueprintCallable)
 		void renew_poop() {
+		
 		Cast<UInGameUI>(Cast<AMainLevelHud>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD())->IngameGenerated)->SetPoopAvilable(true);
 			poop_count = poop_max;
+			Cast<UInGameUI>(Cast<AMainLevelHud>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD())->IngameGenerated)->UpdatePercent(poop_count / poop_max);
 		}
 	UFUNCTION(BlueprintCallable)
 		void SpawnPoop();
