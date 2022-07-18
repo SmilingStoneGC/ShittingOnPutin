@@ -9,6 +9,7 @@
 #include "Poop.h"
 #include "Sound/SoundCue.h"
 #include "Kismet/GameplayStatics.h"
+
 #include "../Interface/InGameUI.h"
 #include "../Interface/MainlevelHud.h"
 #include "Components/SplineComponent.h"
@@ -26,9 +27,11 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "GeneralSettings")
 		TSubclassOf <AActor> Burger;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "GeneralSettings")
+		TArray<USoundCue*>BurgerEatSound;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "GeneralSettings")
 		TSubclassOf <AActor> SplineActor;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "GeneralSettings")
-		USoundCue *PoopSoundCue;
+		TArray<USoundCue*> PoopSound;
 	//UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "GeneralSettings")
 		//UAudioComponent	* PoopAudioComponent;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Components")
@@ -87,7 +90,12 @@ public:
 	}
 	UFUNCTION(BlueprintCallable)
 		void renew_poop() {
-		
+		if (!BurgerEatSound.IsEmpty()) {
+			
+			
+
+			UGameplayStatics::PlaySound2D(this, BurgerEatSound[FMath::Rand() % BurgerEatSound.Num()], 1, 1, 0);
+		}
 		Cast<UInGameUI>(Cast<AMainLevelHud>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD())->IngameGenerated)->SetPoopAvilable(true);
 			poop_count = poop_max;
 			Cast<UInGameUI>(Cast<AMainLevelHud>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD())->IngameGenerated)->UpdatePercent(poop_count / poop_max);

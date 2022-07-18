@@ -53,6 +53,8 @@ void AMainPlayer::SpawnPoop()
 		spawnedpoop->Time_To_Go = 10;
 		spawnedpoop->set_power(1);
 		UGameplayStatics::FinishSpawningActor(spawnedpoop, trans);
+		if(!PoopSound.IsEmpty())
+			UGameplayStatics::SpawnSound2D(this, PoopSound[FMath::Rand() % PoopSound.Num()]);
 		poop_count--;
 		if(!poop_count)Cast<UInGameUI>(Cast<AMainLevelHud>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD())->IngameGenerated)->SetPoopAvilable(false);
 		//if (PoopSoundCue) {
