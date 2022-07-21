@@ -11,6 +11,21 @@
 /**
  * 
  */
+USTRUCT(BlueprintType)
+struct FPutinSpawnParams
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	float AddEveryRound = 0;
+	UPROPERTY(EditAnywhere)
+	int32 count_to_spawn = 0;
+	UPROPERTY(EditAnywhere)
+	float SpeedMultiplier = 1;
+	UPROPERTY(EditAnywhere)
+	float Current_Speed = 15;
+};
 UCLASS()
 class SHITTINGONPUTIN_API ADefaultPlayerController : public APlayerController
 {
@@ -23,16 +38,19 @@ class SHITTINGONPUTIN_API ADefaultPlayerController : public APlayerController
 		virtual void BeginPlay() override;
 		virtual void Tick(float DeltaTime) override;
 		virtual void OnPossess(APawn* InPawn) override;
-		void SpawnPutin();
-		FTimerHandle TimeHandle, Time_Handle_Speed, Time_Handle_CST;
+		void SpawnPutin(TSubclassOf<APutin> ActorToSpawn, FPutinSpawnParams SpawnParams);
 		
-		void ChangeSettings();
+		
+		
 		UPROPERTY(EditAnywhere, Category = "Params")
-			TSubclassOf<APutin> Putin;
+			TArray<TSubclassOf<APutin>> Putins;
 		UPROPERTY(EditAnywhere, Category = "Params")
-		float Putin_Spawntime = 3;
+			float SpawnPeriod = 2;
+
 		UPROPERTY(EditAnywhere, Category = "Params")
-		float Putin_Speed = 30;
+			TArray<FPutinSpawnParams> Rules;
+
+
 	private:
-		void ChangeSpawnTime();
+		int32 CurrentWave = 1;
 };
