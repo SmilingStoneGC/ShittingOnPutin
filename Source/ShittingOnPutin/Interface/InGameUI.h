@@ -37,6 +37,10 @@ class SHITTINGONPUTIN_API UInGameUI : public UUserWidget
 		UImage* PoopUnaviableImage;
 	UPROPERTY(EditDefaultsOnly, Category = "Settings")
 		FString DefaultScoreText;
+	UPROPERTY(EditDefaultsOnly, Category = "Settings")
+		FString DefaultBestScoreText;
+	UPROPERTY(BlueprintReadWrite, Category = "Settings")
+		UTextBlock* BestScoreText;
 	UPROPERTY(BlueprintReadWrite, Category = "Settings")
 		UTextBlock* ScoreText;
 };

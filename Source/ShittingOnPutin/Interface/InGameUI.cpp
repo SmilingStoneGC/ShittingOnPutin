@@ -3,6 +3,7 @@
 
 #include "InGameUI.h"
 #include "../Public/MainPlayer.h"
+#include "../Public/MainGameInstance.h"
 void UInGameUI::NativeConstruct()
 {
 	
@@ -10,8 +11,12 @@ void UInGameUI::NativeConstruct()
 		SetScoreText(Cast<AMainPlayer>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn())->getScore());
 		SetPoopAvilable(Cast<AMainPlayer>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn())->is_poop_empty());
 		UpdatePercent(Cast<AMainPlayer>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn())->get_poop_count_percent());
+		FString b =FString::Printf(TEXT("%s: %1.0f"),*DefaultBestScoreText,	Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))->ASaveObj->High_Score);
+		BestScoreText->SetText(FText::FromString(b));
 	}
-	else SetScoreText(0);
+	else { SetScoreText(0); 
+		UpdatePercent(1);
+	}
 }
 
 void UInGameUI::SetScoreText(float score)

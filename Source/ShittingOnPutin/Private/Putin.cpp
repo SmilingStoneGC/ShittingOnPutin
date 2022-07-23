@@ -2,7 +2,7 @@
 
 
 #include "Putin.h"
-
+#include "DefaultPlayerController.h"
 // Sets default values
 APutin::APutin()
 {
@@ -40,6 +40,11 @@ void APutin::Uebalsa(UPrimitiveComponent* OverlappedComponent, AActor* OtherActo
 	if (to_srat) {
 		to_srat->destroy_cube();
 		Cast<AMainPlayer>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn())->addScore(10);
+		TArray <AActor*> PutinsArray;
+		UGameplayStatics::GetAllActorsOfClass(GetWorld(), APutin::StaticClass(), PutinsArray);
+		if (PutinsArray.Num() <= 1&& Cast<ADefaultPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0))->IsEndWave()) {
+			Cast<ADefaultPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0))->StartNewWave();
+		}
 		Destroy();
 	}
 	
@@ -50,6 +55,7 @@ void APutin::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	float time_pos = GetWorld()->TimeSeconds-start_time;
+	
 	if (time_pos > time_to_done) {
 		Destroy(); 
 		return;
