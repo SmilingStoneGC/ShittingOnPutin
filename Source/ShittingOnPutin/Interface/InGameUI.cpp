@@ -11,15 +11,21 @@ void UInGameUI::NativeConstruct()
 		SetScoreText(Cast<AMainPlayer>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn())->getScore());
 		SetPoopAvilable(Cast<AMainPlayer>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn())->is_poop_empty());
 		UpdatePercent(Cast<AMainPlayer>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn())->get_poop_count_percent());
+		FString b;
 		if (Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))) {
-			FString b = FString::Printf(TEXT("%s: %1.0f"), *DefaultBestScoreText, Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))->ASaveObj->High_Score);
+			if (Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))->ASaveObj->High_Score >= 0)
+				b = FString::Printf(TEXT("%s: %1.0f"), *DefaultBestScoreText, Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))->ASaveObj->High_Score);
+			else b = FString::Printf(TEXT("%s: 0"), *DefaultBestScoreText);
 			BestScoreText->SetText(FText::FromString(b));
 		}
 	}
 	else { SetScoreText(0); 
 		UpdatePercent(1);
+		FString b;
 		if (Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))){
-			FString b = FString::Printf(TEXT("%s: %1.0f"), *DefaultBestScoreText, Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))->ASaveObj->High_Score);
+			if (Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))->ASaveObj->High_Score >= 0)
+				b = FString::Printf(TEXT("%s: %1.0f"), *DefaultBestScoreText, Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))->ASaveObj->High_Score);
+			else b = FString::Printf(TEXT("%s: 0"), *DefaultBestScoreText);
 			BestScoreText->SetText(FText::FromString(b));
 		}
 		SetPoopAvilable(true);
